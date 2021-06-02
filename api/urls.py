@@ -14,10 +14,10 @@ urlpatterns = [
     path('get_proveedor/<int:arg>', views.get_proveedor),
     path('get_proveedor/', views.get_proveedor),
     path('create_proveedor', views.create_proveedor),
-    # status_proveedor
-    path('get_status_proveedor/<int:arg>', views.get_status_proveedor),
-    path('get_status_proveedor/', views.get_status_proveedor),
-    path('create_status_proveedor', views.create_status_proveedor),
+    # estatus_proveedor
+    path('get_estatus_proveedor/<int:arg>', views.get_estatus_proveedor),
+    path('get_estatus_proveedor/', views.get_estatus_proveedor),
+    path('create_estatus_proveedor', views.create_estatus_proveedor),
     #contacto
     path('get_contacto/<int:arg>', views.get_contacto),
     path('get_contacto/', views.get_contacto),

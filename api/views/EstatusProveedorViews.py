@@ -12,7 +12,7 @@ from kernel.serializers import EstatusProveedorSerializer
 
 # status_proveedor
 @api_view(['GET'])
-def get_status_proveedor(request: WSGIRequest, arg: str = None) -> Response:
+def get_estatus_proveedor(request: WSGIRequest, arg: str = None) -> Response:
     if arg:
         try:
             status_proveedor: list = [EstatusProveedor.objects.get(id_estado_proveedor=arg)]
@@ -25,7 +25,7 @@ def get_status_proveedor(request: WSGIRequest, arg: str = None) -> Response:
 
 
 @api_view(['POST'])
-def create_status_proveedor(request: WSGIRequest) -> Response:
+def create_estatus_proveedor(request: WSGIRequest) -> Response:
     body: dict = json.loads(request.body)
     nombre: str = body.get("nombre", None)
     descripcion: str = body.get("descripcion", None)
