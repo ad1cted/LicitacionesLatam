@@ -1,17 +1,12 @@
 from rest_framework import serializers
-from kernel.models import Moneda, TipoCodigoNacional, TipoContacto, Proveedor, StatusAdjudicacion, \
-    EstadoProveedor, EstadoLicitacion, CodigoCategoria, Contacto, Adjudicacion, Licitacion, Licitante, HistoricalStatusAssign
+
+from kernel.models import Moneda, TipoContacto, Proveedor, \
+    EstatusProveedor, Contacto, Licitacion, Pais, Localidad, Organismo, Ejecutivo
 
 
 class MonedaSerializer(serializers.ModelSerializer):
-    class Meta():
-        model = Moneda
-        fields = '__all__'
-
-
-class TipoCodigoNacionalSerializer(serializers.ModelSerializer):
     class Meta:
-        model = TipoCodigoNacional
+        model = Moneda
         fields = '__all__'
 
 
@@ -21,33 +16,33 @@ class TipoContactoSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class OrganismoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Organismo
+        fields = '__all__'
+
+
+class EjecutivoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Ejecutivo
+        fields = '__all__'
+
+
 class ProveedorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Proveedor
         fields = '__all__'
 
 
-class StatusAdjudicacionSerializer(serializers.ModelSerializer):
+class EstatusProveedorSerializer(serializers.ModelSerializer):
     class Meta:
-        model = StatusAdjudicacion
+        model = EstatusProveedor
         fields = '__all__'
 
 
-class EstadoProveedorSerializer(serializers.ModelSerializer):
+class LocalidadSerializer(serializers.ModelSerializer):
     class Meta:
-        model = EstadoProveedor
-        fields = '__all__'
-
-
-class EstadoLicitacionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = EstadoLicitacion
-        fields = '__all__'
-
-
-class CodigoCategoriaSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CodigoCategoria
+        model = Localidad
         fields = '__all__'
 
 
@@ -57,25 +52,13 @@ class ContactoSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class AdjudicacionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Adjudicacion
-        fields = '__all__'
-
-
 class LicitacionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Licitacion
         fields = '__all__'
 
 
-class LicitanteSerializer(serializers.ModelSerializer):
+class PaisSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Licitante
-        fields = '__all__'
-
-
-class HistoricalStatusAssignSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = HistoricalStatusAssign
+        model = Pais
         fields = '__all__'
