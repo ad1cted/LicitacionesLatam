@@ -35,11 +35,15 @@ urlpatterns = [
     path('get_localidad/', views.get_localidad),
     path('create_localidad', views.create_localidad),
     # organismo
-    path('get_organismo<str:arg>', views.get_organismo),
+    path('get_organismov<str:arg>', views.get_organismo),
     path('get_organismo/', views.get_organismo),
     path('create_organismo', views.create_organismo),
     # ejecutivo
-    path('get_ejecutivo<str:arg>', views.get_ejecutivo),
+    path('get_ejecutivo/<str:arg>', views.get_ejecutivo),
     path('get_ejecutivo/', views.get_ejecutivo),
     path('create_ejecutivo', views.create_ejecutivo),
+    # rol
+    path('get_rol/<str:arg>', views.get_rol),
+    path('get_rol/', views.get_rol),
+    path('create_rol', views.create_rol),
 ]

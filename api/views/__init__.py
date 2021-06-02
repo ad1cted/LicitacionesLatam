@@ -1,4 +1,5 @@
 from .ContactoViews import *
+from .EJecutivoViews import *
 from .EstatusProveedorViews import *
 from .LicitacionViews import *
 from .LocalidadViews import *
@@ -6,5 +7,5 @@ from .MonedaViews import *
 from .OrganismoViews import *
 from .PaisViews import *
 from .ProveedorViews import *
+from .RolViews import *
 from .TipoContactoViews import *
-from .EJecutivoViews import *
