@@ -1,5 +1,5 @@
 from .ContactoViews import *
-from .EJecutivoViews import *
+from .EjecutivoViews import *
 from .EstatusProveedorViews import *
 from .LicitacionViews import *
 from .LocalidadViews import *
