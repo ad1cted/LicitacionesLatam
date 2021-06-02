@@ -31,9 +31,12 @@ def create_status_proveedor(request: WSGIRequest) -> Response:
     descripcion: str = body.get("descripcion", None)
     sended_status = status.HTTP_206_PARTIAL_CONTENT
     if nombre:
-        EstatusProveedor.objects.create(
-            nombre=nombre,
-            descripcion=descripcion,
-        )
+        try:
+            EstatusProveedor.objects.create(
+                nombre=nombre,
+                descripcion=descripcion,
+            )
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={"error": "el estatus ya existe"})
         sended_status: int = status.HTTP_201_CREATED
     return Response(status=sended_status)
