@@ -1,15 +1,15 @@
 import json
-import requests
+import time
 import urllib
+import urllib.parse as urlparse
+from urllib.parse import parse_qs
 
+import requests
+from bs4 import BeautifulSoup
+from django.core.handlers.wsgi import WSGIRequest
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.core.handlers.wsgi import WSGIRequest
-from urllib.parse import parse_qs
 from selenium import webdriver
-import time
-import urllib.parse as urlparse
-from bs4 import BeautifulSoup
 
 
 def init_chromedriver():
@@ -51,7 +51,8 @@ def get_data_by_codigo_expediente(request: WSGIRequest) -> JsonResponse:
     if codigo_expediente:
         driver = init_chromedriver()
         driver.get("https://compranet.hacienda.gob.mx/esop/guest/go/public/opportunity/past?locale=es_MX")
-        driver.get("https://compranet.hacienda.gob.mx/esop/toolkit/opportunity/opportunityList.do?reset=true&resetstored=true&oppList=CURRENT")
+        driver.get(
+            "https://compranet.hacienda.gob.mx/esop/toolkit/opportunity/opportunityList.do?reset=true&resetstored=true&oppList=CURRENT")
         driver.find_element_by_xpath('//*[@id="widget_filterPickerSelect"]/div[1]/input').click()
         time.sleep(1)
         driver.find_element_by_xpath('//*[@id="filterPickerSelect_popup1"]/span[2]').click()
@@ -84,7 +85,8 @@ def get_data_by_opportunity_id(request: WSGIRequest) -> JsonResponse:
         response = {}
         driver = init_chromedriver()
         driver.get("https://compranet.hacienda.gob.mx/esop/guest/go/public/opportunity/past?locale=es_MX")
-        driver.get(f"https://compranet.hacienda.gob.mx/esop/toolkit/opportunity/opportunityDetail.do?opportunityId={opportunity_id}")
+        driver.get(
+            f"https://compranet.hacienda.gob.mx/esop/toolkit/opportunity/opportunityDetail.do?opportunityId={opportunity_id}")
         source_code = driver.page_source
         driver.close()
         soup = BeautifulSoup(source_code, "lxml")
