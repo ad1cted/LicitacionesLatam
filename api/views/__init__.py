@@ -9,3 +9,4 @@ from .PaisViews import *
 from .ProveedorViews import *
 from .RolViews import *
 from .TipoContactoViews import *
+from .RolEjecutivoViews import *

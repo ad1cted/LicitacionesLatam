@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from kernel.models import Moneda, TipoContacto, Proveedor, \
-    EstatusProveedor, Contacto, Licitacion, Pais, Localidad, Organismo, Ejecutivo, Rol
+    EstatusProveedor, Contacto, Licitacion, Pais, Localidad, Organismo, Ejecutivo, Rol, RolEjecutivo
 
 
 class MonedaSerializer(serializers.ModelSerializer):
@@ -37,6 +37,12 @@ class ProveedorSerializer(serializers.ModelSerializer):
 class RolSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rol
+        fields = '__all__'
+
+
+class RolEjecutivoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RolEjecutivo
         fields = '__all__'
 
 
