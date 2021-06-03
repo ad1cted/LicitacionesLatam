@@ -10,3 +10,4 @@ from .ProveedorViews import *
 from .RolViews import *
 from .TipoContactoViews import *
 from .RolEjecutivoViews import *
+from .ProveedorEstatusProveedorViews import *
