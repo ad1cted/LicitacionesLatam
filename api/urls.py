@@ -58,6 +58,11 @@ urlpatterns = [
     path('get_estadoProveedor_licitacion/<str:arg>', views.get_estadoProveedor_licitacion),
     path('get_estadoProveedor_licitacion/', views.get_estadoProveedor_licitacion),
     path('create_estadoProveedor_licitacion', views.create_estadoProveedor_licitacion),
+    # proveedorLicitacion
+    path('get_proveedorLicitacion/<str:arg>', views.get_proveedorLicitacion),
+    path('get_proveedorLicitacion/', views.get_proveedorLicitacion),
+    path('create_proveedorLicitacion', views.create_proveedorLicitacion),
+
 
 
 ]
