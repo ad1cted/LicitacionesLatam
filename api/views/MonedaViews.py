@@ -35,3 +35,16 @@ def create_moneda(request: WSGIRequest) -> Response:
         except IntegrityError:
             return Response(status=status.HTTP_400_BAD_REQUEST, data={"error": "la moneda ya existe"})
     return Response(status=sended_status)
+
+@api_view(['GET'])
+def delete_moneda(request: WSGIRequest, arg: str = None) -> Response:
+    if arg:
+        try:
+            Moneda.objects.get(id=arg)
+            return Response(status=status.HTTP_200_OK,
+                            data={"message": f"Moneda id={arg} borrado correctamente"})
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND,
+                            data={"error": "imposible borrar el Moneda, es posible que ni exista"})
+    else:
+        return Response(status=status.HTTP_404_NOT_FOUND, data={"error": "no has indicado el id a borrar"})

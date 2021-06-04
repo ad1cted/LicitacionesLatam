@@ -51,3 +51,16 @@ def create_proveedorEstatus_proveedor(request: WSGIRequest) -> Response:
                             data={"error": "error con ProveedorEstatusProveedor, es proable que ya exista"})
         sended_status: int = status.HTTP_201_CREATED
     return Response(status=status.HTTP_201_CREATED)
+
+@api_view(['GET'])
+def delete_proveedorEstatus_proveedor(request: WSGIRequest, arg: str = None) -> Response:
+    if arg:
+        try:
+            ProveedorEstatusProveedor.objects.get(id=arg)
+            return Response(status=status.HTTP_200_OK,
+                            data={"message": f"proveedorEstatus_proveedor id={arg} borrado correctamente"})
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND,
+                            data={"error": "imposible borrar el proveedorEstatus_proveedor, es posible que ni exista"})
+    else:
+        return Response(status=status.HTTP_404_NOT_FOUND, data={"error": "no has indicado el id a borrar"})

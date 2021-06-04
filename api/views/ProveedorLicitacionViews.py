@@ -55,3 +55,16 @@ def create_proveedorLicitacion(request: WSGIRequest) -> Response:
         )
         sended_status: int = status.HTTP_201_CREATED
     return Response(status=sended_status)
+
+@api_view(['GET'])
+def delete_proveedorLicitacion(request: WSGIRequest, arg: str = None) -> Response:
+    if arg:
+        try:
+            ProveedorLicitacion.objects.get(id=arg)
+            return Response(status=status.HTTP_200_OK,
+                            data={"message": f"ProveedorLicitacion id={arg} borrado correctamente"})
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND,
+                            data={"error": "imposible borrar el ProveedorLicitacion, es posible que ni exista"})
+    else:
+        return Response(status=status.HTTP_404_NOT_FOUND, data={"error": "no has indicado el id a borrar"})

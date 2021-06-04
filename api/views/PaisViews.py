@@ -39,3 +39,16 @@ def get_pais(request: WSGIRequest, arg: str = None) -> Response:
         pais: list = Pais.objects.all()
     serializer: PaisSerializer = PaisSerializer(pais, many=True)
     return Response(serializer.data)
+
+@api_view(['GET'])
+def delete_pais(request: WSGIRequest, arg: str = None) -> Response:
+    if arg:
+        try:
+            Pais.objects.get(id=arg)
+            return Response(status=status.HTTP_200_OK,
+                            data={"message": f"Pais id={arg} borrado correctamente"})
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND,
+                            data={"error": "imposible borrar el Pais, es posible que ni exista"})
+    else:
+        return Response(status=status.HTTP_404_NOT_FOUND, data={"error": "no has indicado el id a borrar"})

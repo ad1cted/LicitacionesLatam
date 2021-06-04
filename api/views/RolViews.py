@@ -42,3 +42,17 @@ def create_rol(request: WSGIRequest) -> Response:
                             data={"error": "error con rol, es proable que ya exista"})
         sended_status: int = status.HTTP_201_CREATED
     return Response(status=sended_status)
+
+
+@api_view(['GET'])
+def delete_rol(request: WSGIRequest, arg: str = None) -> Response:
+    if arg:
+        try:
+            Rol.objects.get(id=arg)
+            return Response(status=status.HTTP_200_OK,
+                            data={"message": f"Rol id={arg} borrado correctamente"})
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND,
+                            data={"error": "imposible borrar el Rol, es posible que ni exista"})
+    else:
+        return Response(status=status.HTTP_404_NOT_FOUND, data={"error": "no has indicado el id a borrar"})
