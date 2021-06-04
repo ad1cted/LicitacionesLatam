@@ -15,7 +15,7 @@ from kernel.serializers import ContactoSerializer
 def get_contacto(request: WSGIRequest, arg: str = None) -> Response:
     if arg:
         try:
-            contacto: list = [Contacto.objects.get(id_contacto=arg)]
+            contacto: list = [Contacto.objects.get(id=arg)]
         except ObjectDoesNotExist:
             contacto = []
     else:
@@ -40,7 +40,7 @@ def create_contacto(request: WSGIRequest) -> Response:
         tipo_contacto = TipoContacto.objects.get(id=id_tipo_contacto)
     except:
         return Response(status=status.HTTP_400_BAD_REQUEST, data={"error": "error con Tipo_contacto indicado"})
-    if valor :
+    if valor:
         Contacto.objects.create(
             activo=activo,
             valor=valor,
@@ -49,3 +49,16 @@ def create_contacto(request: WSGIRequest) -> Response:
         )
         sended_status: int = status.HTTP_201_CREATED
     return Response(status=sended_status)
+
+
+@api_view(['GET'])
+def delete_contacto(request: WSGIRequest, arg: str = None) -> Response:
+    if arg:
+        try:
+            Contacto.objects.get(id=arg).delete()
+            return Response(status=status.HTTP_200_OK, data={"message": f"contacto id={arg} correctamente"})
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND,
+                            data={"error": "imposible borrar el contacto, es posible que ni exista"})
+    else:
+        return Response(status=status.HTTP_404_NOT_FOUND, data={"error": "no has indicado el id a borrar"})

@@ -22,6 +22,9 @@ urlpatterns = [
     path('get_contacto/<int:arg>', views.get_contacto),
     path('get_contacto/', views.get_contacto),
     path('create_contacto', views.create_contacto),
+    path('delete_contacto/<int:arg>', views.delete_contacto),
+
+
     # licitacion
     path('get_licitacion/<int:arg>', views.get_licitacion),
     path('get_licitacion/', views.get_licitacion),
