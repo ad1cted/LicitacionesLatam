@@ -45,6 +45,8 @@ urlpatterns = [
     path('get_ejecutivo/<str:arg>', views.get_ejecutivo),
     path('get_ejecutivo/', views.get_ejecutivo),
     path('create_ejecutivo', views.create_ejecutivo),
+    path('delete_ejecutivo/<int:arg>', views.delete_ejecutivo),
+
     # rol
     path('get_rol/<str:arg>', views.get_rol),
     path('get_rol/', views.get_rol),

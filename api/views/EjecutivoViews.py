@@ -39,3 +39,16 @@ def get_ejecutivo(request: WSGIRequest, arg: str = None) -> Response:
         ejecutivo: list = Ejecutivo.objects.all()
     serializer: EjecutivoSerializer = EjecutivoSerializer(ejecutivo, many=True)
     return Response(serializer.data)
+
+
+@api_view(['GET'])
+def delete_ejecutivo(request: WSGIRequest, arg: str = None) -> Response:
+    if arg:
+        try:
+            Ejecutivo.objects.get(id=arg)
+            return Response(status=status.HTTP_200_OK, data={"message": f"ejecutivo id={arg} borrado correctamente"})
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND,
+                            data={"error": "imposible borrar el ejecutivo, es posible que ni exista"})
+    else:
+        return Response(status=status.HTTP_404_NOT_FOUND, data={"error": "no has indicado el id a borrar"})
