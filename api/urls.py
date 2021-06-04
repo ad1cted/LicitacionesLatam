@@ -1,4 +1,5 @@
 from django.urls import path
+
 from api import views
 
 urlpatterns = [
@@ -10,7 +11,7 @@ urlpatterns = [
     path('get_tipo_contacto/<int:arg>', views.get_tipo_contacto),
     path('get_tipo_contacto/', views.get_tipo_contacto),
     path('create_tipo_contacto', views.create_tipo_contacto),
-    #proveedor
+    # proveedor
     path('get_proveedor/<int:arg>', views.get_proveedor),
     path('get_proveedor/', views.get_proveedor),
     path('create_proveedor', views.create_proveedor),
@@ -18,12 +19,11 @@ urlpatterns = [
     path('get_estatus_proveedor/<int:arg>', views.get_estatus_proveedor),
     path('get_estatus_proveedor/', views.get_estatus_proveedor),
     path('create_estatus_proveedor', views.create_estatus_proveedor),
-    #contacto
+    # contacto
     path('get_contacto/<int:arg>', views.get_contacto),
     path('get_contacto/', views.get_contacto),
     path('create_contacto', views.create_contacto),
     path('delete_contacto/<int:arg>', views.delete_contacto),
-
 
     # licitacion
     path('get_licitacion/<int:arg>', views.get_licitacion),
@@ -63,11 +63,11 @@ urlpatterns = [
     path('get_estadoProveedor_licitacion/<str:arg>', views.get_estadoProveedor_licitacion),
     path('get_estadoProveedor_licitacion/', views.get_estadoProveedor_licitacion),
     path('create_estadoProveedor_licitacion', views.create_estadoProveedor_licitacion),
+    path('delete_estadoProveedor_licitacion/<int:arg>', views.delete_estadoProveedor_licitacion),
+
     # proveedorLicitacion
     path('get_proveedorLicitacion/<str:arg>', views.get_proveedorLicitacion),
     path('get_proveedorLicitacion/', views.get_proveedorLicitacion),
     path('create_proveedorLicitacion', views.create_proveedorLicitacion),
-
-
 
 ]
