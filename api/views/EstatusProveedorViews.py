@@ -40,3 +40,17 @@ def create_estatus_proveedor(request: WSGIRequest) -> Response:
             return Response(status=status.HTTP_400_BAD_REQUEST, data={"error": "el estatus ya existe"})
         sended_status: int = status.HTTP_201_CREATED
     return Response(status=sended_status)
+
+
+@api_view(['GET'])
+def delete_estatus_proveedor(request: WSGIRequest, arg: str = None) -> Response:
+    if arg:
+        try:
+            EstatusProveedor.objects.get(id=arg)
+            return Response(status=status.HTTP_200_OK,
+                            data={"message": f"EstatusProveedor id={arg} borrado correctamente"})
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND,
+                            data={"error": "imposible borrar el EstatusProveedor, es posible que ni exista"})
+    else:
+        return Response(status=status.HTTP_404_NOT_FOUND, data={"error": "no has indicado el id a borrar"})

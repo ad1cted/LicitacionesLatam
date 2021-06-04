@@ -19,6 +19,8 @@ urlpatterns = [
     path('get_estatus_proveedor/<int:arg>', views.get_estatus_proveedor),
     path('get_estatus_proveedor/', views.get_estatus_proveedor),
     path('create_estatus_proveedor', views.create_estatus_proveedor),
+    path('delete_estatus_proveedor/<int:arg>', views.delete_estatus_proveedor),
+
     # contacto
     path('get_contacto/<int:arg>', views.get_contacto),
     path('get_contacto/', views.get_contacto),

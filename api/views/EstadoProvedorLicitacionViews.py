@@ -52,6 +52,6 @@ def delete_estadoProveedor_licitacion(request: WSGIRequest, arg: str = None) -> 
                             data={"message": f"EstadoProvedorLicitacion id={arg} borrado correctamente"})
         except:
             return Response(status=status.HTTP_404_NOT_FOUND,
-                            data={"error": "imposible borrar el ejecutivo, es posible que ni exista"})
+                            data={"error": "imposible borrar el EstadoProvedorLicitacion, es posible que ni exista"})
     else:
         return Response(status=status.HTTP_404_NOT_FOUND, data={"error": "no has indicado el id a borrar"})
