@@ -56,6 +56,7 @@ def create_proveedorLicitacion(request: WSGIRequest) -> Response:
         sended_status: int = status.HTTP_201_CREATED
     return Response(status=sended_status)
 
+
 @api_view(['GET'])
 def delete_proveedorLicitacion(request: WSGIRequest, arg: str = None) -> Response:
     if arg:

@@ -8,7 +8,7 @@ urlpatterns = [
     path('get_moneda/', views.get_moneda),
     path('create_moneda', views.create_moneda),
     path('delete_moneda/<str:isocode>', views.delete_moneda),
-
+    path('update_moneda', views.update_moneda),
     # tipo contacto
     path('get_tipo_contacto/<int:arg>', views.get_tipo_contacto),
     path('get_tipo_contacto/', views.get_tipo_contacto),

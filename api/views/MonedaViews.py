@@ -40,6 +40,7 @@ def create_moneda(request: WSGIRequest) -> Response:
             return Response(status=status.HTTP_400_BAD_REQUEST, data={"error": "la moneda ya existe"})
     return Response(status=sended_status)
 
+
 @api_view(['GET'])
 def delete_moneda(request: WSGIRequest, isocode: str = None) -> Response:
     if isocode:
@@ -53,3 +54,16 @@ def delete_moneda(request: WSGIRequest, isocode: str = None) -> Response:
                             data={"error": "imposible borrar el Moneda, es posible que ni exista"})
     else:
         return Response(status=status.HTTP_404_NOT_FOUND, data={"error": "no has indicado el id a borrar"})
+
+
+@api_view(['POST'])
+def update_moneda(request: WSGIRequest) -> Response:
+    body: dict = json.loads(request.body)
+    isocode: str = body.get("isocode", None)
+    if len(isocode) != 3:
+        return Response(status=status.HTTP_400_BAD_REQUEST, data={"error": "isocode no cumple formato"})
+    moneda = Moneda.objects.get(isocode=isocode)
+    nombre: str = body.get("nombre", None)
+    moneda.nombre = nombre
+    moneda.save()
+    return Response(status=status.HTTP_200_OK)
