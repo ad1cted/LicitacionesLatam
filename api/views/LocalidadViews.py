@@ -56,3 +56,18 @@ def delete_localidad(request: WSGIRequest, arg: str = None) -> Response:
                             data={"error": "imposible borrar el Localidad, es posible que ni exista"})
     else:
         return Response(status=status.HTTP_404_NOT_FOUND, data={"error": "no has indicado el id a borrar"})
+
+
+@api_view(['POST'])
+def update_localidad(request: WSGIRequest) -> Response:
+    body: dict = json.loads(request.body)
+    id: int = body.get("id", None)
+    localidad = Localidad.objects.get(id=id)
+    codigo_area: int = body.get("codigo_area", None)
+    nombre: str = body.get("nombre", None)
+    isocode: str = body.get("isocode", None)
+    localidad.codigo_area = codigo_area
+    localidad.nombre = nombre
+    localidad.isocode = Pais.objects.get(isocode=isocode)
+    localidad.save()
+    return Response(status=status.HTTP_200_OK)

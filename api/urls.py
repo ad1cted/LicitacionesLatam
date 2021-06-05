@@ -52,6 +52,7 @@ urlpatterns = [
     path('get_localidad/', views.get_localidad),
     path('create_localidad', views.create_localidad),
     path('delete_localidad/<int:arg>', views.delete_localidad),
+    path('update_localidad', views.update_localidad),
 
     # organismo
     path('get_organismo/<int:arg>', views.get_organismo),
