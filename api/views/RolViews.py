@@ -56,3 +56,16 @@ def delete_rol(request: WSGIRequest, arg: str = None) -> Response:
                             data={"error": "imposible borrar el Rol, es posible que ni exista"})
     else:
         return Response(status=status.HTTP_404_NOT_FOUND, data={"error": "no has indicado el id a borrar"})
+
+
+@api_view(['POST'])
+def update_rol(request: WSGIRequest) -> Response:
+    body: dict = json.loads(request.body)
+    id: int = body.get("id", None)
+    rol: Rol = Rol.objects.get(id=id)
+    nombre: str = body.get("nombre", None)
+    configuracion: dict = body.get("configuracion", None)
+    rol.nombre = nombre
+    rol.configuracion = configuracion
+    rol.save()
+    return Response(status=status.HTTP_200_OK)
