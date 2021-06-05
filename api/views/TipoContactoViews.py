@@ -31,9 +31,10 @@ def create_tipo_contacto(request: WSGIRequest) -> Response:
     descripcion: str = body.get("descripcion", None)
     sended_status = status.HTTP_206_PARTIAL_CONTENT
     if nombre:
-        TipoContacto.objects.create(nombre=nombre,descripcion=descripcion)
+        TipoContacto.objects.create(nombre=nombre, descripcion=descripcion)
         sended_status: int = status.HTTP_201_CREATED
     return Response(status=sended_status)
+
 
 @api_view(['GET'])
 def delete_tipo_contacto(request: WSGIRequest, arg: str = None) -> Response:
@@ -47,3 +48,16 @@ def delete_tipo_contacto(request: WSGIRequest, arg: str = None) -> Response:
                             data={"error": "imposible borrar el TipoContacto, es posible que ni exista"})
     else:
         return Response(status=status.HTTP_404_NOT_FOUND, data={"error": "no has indicado el id a borrar"})
+
+
+@api_view(['POST'])
+def update_tipo_contacto(request: WSGIRequest) -> Response:
+    body: dict = json.loads(request.body)
+    id: int = body.get("id", None)
+    tipo_contacto = TipoContacto.objects.get(id=id)
+    nombre: str = body.get("nombre", None)
+    descripcion: str = body.get("descripcion", None)
+    tipo_contacto.nombre = nombre
+    tipo_contacto.descripcion = descripcion
+    tipo_contacto.save()
+    return Response(status=status.HTTP_200_OK)

@@ -14,6 +14,7 @@ urlpatterns = [
     path('get_tipo_contacto/', views.get_tipo_contacto),
     path('create_tipo_contacto', views.create_tipo_contacto),
     path('delete_tipo_contacto/<int:arg>', views.delete_tipo_contacto),
+    path('update_tipo_contacto', views.update_tipo_contacto),
 
     # proveedor
     path('get_proveedor/<int:arg>', views.get_proveedor),
@@ -44,6 +45,7 @@ urlpatterns = [
     path('get_pais/', views.get_pais),
     path('create_pais', views.create_pais),
     path('delete_pais/<str:arg>', views.delete_pais),
+    path('update_pais', views.update_pais),
 
     # localidad
     path('get_localidad/<int:id>', views.get_localidad),

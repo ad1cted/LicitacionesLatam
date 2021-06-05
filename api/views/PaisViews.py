@@ -40,6 +40,7 @@ def get_pais(request: WSGIRequest, arg: str = None) -> Response:
     serializer: PaisSerializer = PaisSerializer(pais, many=True)
     return Response(serializer.data)
 
+
 @api_view(['GET'])
 def delete_pais(request: WSGIRequest, arg: str = None) -> Response:
     if arg:
@@ -52,3 +53,16 @@ def delete_pais(request: WSGIRequest, arg: str = None) -> Response:
                             data={"error": "imposible borrar el Pais, es posible que ni exista"})
     else:
         return Response(status=status.HTTP_404_NOT_FOUND, data={"error": "no has indicado el id a borrar"})
+
+
+@api_view(['POST'])
+def update_pais(request: WSGIRequest) -> Response:
+    body: dict = json.loads(request.body)
+    isocode: str = body.get("isocode", None)
+    if len(isocode) != 3:
+        return Response(status=status.HTTP_400_BAD_REQUEST, data={"error": "isocode no cumple formato"})
+    pais = Pais.objects.get(isocode=isocode)
+    nombre: str = body.get("nombre", None)
+    pais.nombre = nombre
+    pais.save()
+    return Response(status=status.HTTP_200_OK)
