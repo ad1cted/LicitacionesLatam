@@ -63,3 +63,16 @@ def delete_rolEjecutivo(request: WSGIRequest, arg: str = None) -> Response:
                             data={"error": "imposible borrar el RolEjecutivo, es posible que ni exista"})
     else:
         return Response(status=status.HTTP_404_NOT_FOUND, data={"error": "no has indicado el id a borrar"})
+
+
+@api_view(['POST'])
+def update_rolEjecutivo(request: WSGIRequest) -> Response:
+    body: dict = json.loads(request.body)
+    id: int = body.get("id", None)
+    rolEjecutivo: RolEjecutivo = RolEjecutivo.objects.get(id=id)
+    id_Rol: str = body.get("id_Rol", None)
+    id_Ejecutivo: dict = body.get("id_Ejecutivo", None)
+    rolEjecutivo.id_Rol = Rol.objects.get(id=id_Rol)
+    rolEjecutivo.id_Ejecutivo = Ejecutivo.objects.get(id=id_Ejecutivo)
+    rolEjecutivo.save()
+    return Response(status=status.HTTP_200_OK)

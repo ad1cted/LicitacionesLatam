@@ -83,6 +83,7 @@ urlpatterns = [
     path('get_rolEjecutivo/', views.get_rolEjecutivo),
     path('create_rolEjecutivo', views.create_rolEjecutivo),
     path('delete_rolEjecutivo/<int:arg>', views.delete_rolEjecutivo),
+    path('update_rolEjecutivo', views.update_rolEjecutivo),
 
     # proveedorEstatus_proveedor
     path('get_proveedorEstatus_proveedor/<int:arg>', views.get_proveedorEstatus_proveedor),
