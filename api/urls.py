@@ -42,6 +42,7 @@ urlpatterns = [
     path('get_licitacion/', views.get_licitacion),
     path('create_licitacion', views.create_licitacion),
     path('delete_licitacion/<int:arg>', views.delete_licitacion),
+    path('update_licitacion', views.update_licitacion),
 
     # pais
     path('get_pais/<str:arg>', views.get_pais),
@@ -105,5 +106,7 @@ urlpatterns = [
     path('get_proveedorLicitacion/', views.get_proveedorLicitacion),
     path('create_proveedorLicitacion', views.create_proveedorLicitacion),
     path('delete_proveedorLicitacion/<int:arg>', views.delete_proveedorLicitacion),
+    path('update_proveedorLicitacion', views.update_proveedorLicitacion)
+
 
 ]

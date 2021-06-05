@@ -78,3 +78,20 @@ def delete_licitacion(request: WSGIRequest, arg: str = None) -> Response:
                             data={"error": "imposible borrar el licitacion, es posible que ni exista"})
     else:
         return Response(status=status.HTTP_404_NOT_FOUND, data={"error": "no has indicado el id a borrar"})
+
+
+@api_view(['POST'])
+def update_licitacion(request: WSGIRequest) -> Response:
+    body: dict = json.loads(request.body)
+    licitacion: Licitacion = Licitacion.objects.get(id=body.get("id", None))
+    licitacion.fecha_licitacion = body.get("fecha_licitacion", None)
+    licitacion.titulo = body.get("titulo", None)
+    licitacion.importe_contrato = body.get("importe_contrato", None)
+    licitacion.isocode_moneda = Moneda.objects.get(isocode=body.get("isocode_moneda", None))
+    licitacion.raw_data = body.get("raw_data", None)
+    licitacion.external_id = body.get("external_id", None)
+    licitacion.isocode_pais = Pais.objects.get(isocode=body.get("isocode_pais", None))
+    licitacion.id_Organismo = Organismo.objects.get(id=body.get("id_Organismo", None))
+    licitacion.id_Ejecutivo = Ejecutivo.objects.get(id=body.get("id_Ejecutivo", None))
+    licitacion.save()
+    return Response(status=status.HTTP_200_OK)
