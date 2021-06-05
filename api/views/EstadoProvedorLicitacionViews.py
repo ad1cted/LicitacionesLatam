@@ -55,3 +55,13 @@ def delete_estadoProveedor_licitacion(request: WSGIRequest, arg: str = None) -> 
                             data={"error": "imposible borrar el EstadoProvedorLicitacion, es posible que ni exista"})
     else:
         return Response(status=status.HTTP_404_NOT_FOUND, data={"error": "no has indicado el id a borrar"})
+
+
+@api_view(['POST'])
+def update_estadoProveedor_licitacion(request: WSGIRequest) -> Response:
+    body: dict = json.loads(request.body)
+    estadoProvedorLicitacion: EstadoProvedorLicitacion = EstadoProvedorLicitacion.objects.get(id=body.get("id", None))
+    estadoProvedorLicitacion.nombre = body.get("nombre", None)
+    estadoProvedorLicitacion.descripcion = body.get("descripcion", None)
+    estadoProvedorLicitacion.save()
+    return Response(status=status.HTTP_200_OK)

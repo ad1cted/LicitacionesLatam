@@ -90,12 +90,15 @@ urlpatterns = [
     path('get_proveedorEstatus_proveedor/', views.get_proveedorEstatus_proveedor),
     path('create_proveedorEstatus_proveedor', views.create_proveedorEstatus_proveedor),
     path('delete_proveedorEstatus_proveedor/<int:arg>', views.delete_proveedorEstatus_proveedor),
+    path('update_proveedorEstatus_proveedor', views.update_proveedorEstatus_proveedor),
+
 
     # estadoProveedor_licitaciones
     path('get_estadoProveedor_licitacion/<str:arg>', views.get_estadoProveedor_licitacion),
     path('get_estadoProveedor_licitacion/', views.get_estadoProveedor_licitacion),
     path('create_estadoProveedor_licitacion', views.create_estadoProveedor_licitacion),
     path('delete_estadoProveedor_licitacion/<int:arg>', views.delete_estadoProveedor_licitacion),
+    path('update_estadoProveedor_licitacion', views.update_estadoProveedor_licitacion),
 
     # proveedorLicitacion
     path('get_proveedorLicitacion/<str:arg>', views.get_proveedorLicitacion),

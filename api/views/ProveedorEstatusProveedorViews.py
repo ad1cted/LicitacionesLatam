@@ -65,3 +65,16 @@ def delete_proveedorEstatus_proveedor(request: WSGIRequest, arg: str = None) -> 
                             data={"error": "imposible borrar el proveedorEstatus_proveedor, es posible que ni exista"})
     else:
         return Response(status=status.HTTP_404_NOT_FOUND, data={"error": "no has indicado el id a borrar"})
+
+
+@api_view(['POST'])
+def update_proveedorEstatus_proveedor(request: WSGIRequest) -> Response:
+    body: dict = json.loads(request.body)
+    proveedorEstatusProveedor: ProveedorEstatusProveedor = ProveedorEstatusProveedor.objects.get(
+        id=body.get("id", None))
+    proveedorEstatusProveedor.raw_data = body.get("id_Rol", None)
+    proveedorEstatusProveedor.id_EstatusProveedor = EstatusProveedor.objects.get(
+        id=body.get("id_EstatusProveedor", None))
+    proveedorEstatusProveedor.id_Proveedor = Proveedor.objects.get(id=body.get("id_Proveedor", None))
+    proveedorEstatusProveedor.save()
+    return Response(status=status.HTTP_200_OK)
