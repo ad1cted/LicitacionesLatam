@@ -47,6 +47,7 @@ def create_organismo(request: WSGIRequest) -> Response:
         sended_status: int = status.HTTP_201_CREATED
     return Response(status=sended_status)
 
+
 @api_view(['GET'])
 def delete_organismo(request: WSGIRequest, arg: str = None) -> Response:
     if arg:
@@ -59,3 +60,20 @@ def delete_organismo(request: WSGIRequest, arg: str = None) -> Response:
                             data={"error": "imposible borrar el Organismo, es posible que ni exista"})
     else:
         return Response(status=status.HTTP_404_NOT_FOUND, data={"error": "no has indicado el id a borrar"})
+
+
+@api_view(['POST'])
+def update_organismo(request: WSGIRequest) -> Response:
+    body: dict = json.loads(request.body)
+    id: int = body.get("id", None)
+    organismo = Organismo.objects.get(id=id)
+    nombre: str = body.get("nombre", None)
+    descripcion: bool = body.get("descripcion", None)
+    dni: str = body.get("dni", None)
+    id_Localidad: str = body.get("id_Localidad", None)
+    organismo.nombre = nombre
+    organismo.descripcion = descripcion
+    organismo.dni = dni
+    organismo.id_tipo_contacto = Localidad.objects.get(id=id_Localidad)
+    organismo.save()
+    return Response(status=status.HTTP_200_OK)

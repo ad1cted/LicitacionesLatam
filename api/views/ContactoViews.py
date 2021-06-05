@@ -62,3 +62,20 @@ def delete_contacto(request: WSGIRequest, arg: str = None) -> Response:
                             data={"error": "imposible borrar el contacto, es posible que ni exista"})
     else:
         return Response(status=status.HTTP_404_NOT_FOUND, data={"error": "no has indicado el id a borrar"})
+
+
+@api_view(['POST'])
+def update_contacto(request: WSGIRequest) -> Response:
+    body: dict = json.loads(request.body)
+    id: int = body.get("id", None)
+    contacto = Contacto.objects.get(id=id)
+    valor: str = body.get("valor", None)
+    activo: bool = body.get("activo", None)
+    id_proveedor: str = body.get("id_proveedor", None)
+    id_tipo_contacto: str = body.get("id_tipo_contacto", None)
+    contacto.valor = valor
+    contacto.activo = activo
+    contacto.id_proveedor = Proveedor.objects.get(id=id_proveedor)
+    contacto.id_tipo_contacto = TipoContacto.objects.get(id=id_tipo_contacto)
+    contacto.save()
+    return Response(status=status.HTTP_200_OK)

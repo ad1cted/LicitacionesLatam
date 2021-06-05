@@ -7,7 +7,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from kernel.models import Proveedor, \
-    Localidad
+    Localidad, Pais
 from kernel.serializers import ProveedorSerializer
 
 
@@ -50,6 +50,8 @@ def create_proveedor(request: WSGIRequest) -> Response:
         )
         sended_status: int = status.HTTP_201_CREATED
     return Response(status=sended_status)
+
+
 @api_view(['GET'])
 def delete_proveedor(request: WSGIRequest, arg: str = None) -> Response:
     if arg:
@@ -62,3 +64,26 @@ def delete_proveedor(request: WSGIRequest, arg: str = None) -> Response:
                             data={"error": "imposible borrar el Proveedor, es posible que ni exista"})
     else:
         return Response(status=status.HTTP_404_NOT_FOUND, data={"error": "no has indicado el id a borrar"})
+
+
+@api_view(['POST'])
+def update_proveedor(request: WSGIRequest) -> Response:
+    body: dict = json.loads(request.body)
+    id: int = body.get("id", None)
+    proveedor = Proveedor.objects.get(id=id)
+    nombre: str = body.get("nombre", None)
+    razon_social: str = body.get("razon_social", None)
+    descripcion: str = body.get("descripcion", None)
+    raw_data: int = body.get("raw_data", None)
+    dni: str = body.get("dni", None)
+    isocode: str = body.get("isocode", None)
+    fecha_inicio_actividades: str = body.get("fecha_inicio_actividades", None)
+    proveedor.nombre = nombre
+    proveedor.razon_social = razon_social
+    proveedor.descripcion = descripcion
+    proveedor.raw_data = raw_data
+    proveedor.dni = dni
+    proveedor.fecha_inicio_actividades = fecha_inicio_actividades
+    proveedor.isocode = Pais.objects.get(isocode=isocode)
+    proveedor.save()
+    return Response(status=status.HTTP_200_OK)

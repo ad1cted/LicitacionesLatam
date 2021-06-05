@@ -52,3 +52,18 @@ def delete_ejecutivo(request: WSGIRequest, arg: str = None) -> Response:
                             data={"error": "imposible borrar el ejecutivo, es posible que ni exista"})
     else:
         return Response(status=status.HTTP_404_NOT_FOUND, data={"error": "no has indicado el id a borrar"})
+
+
+@api_view(['POST'])
+def update_ejecutivo(request: WSGIRequest) -> Response:
+    body: dict = json.loads(request.body)
+    id: int = body.get("id", None)
+    ejecutivo = Ejecutivo.objects.get(id=id)
+    id_externo: int = body.get("id_externo", None)
+    username: str = body.get("username", None)
+    activo: str = body.get("activo", None)
+    ejecutivo.id_externo = id_externo
+    ejecutivo.username = username
+    ejecutivo.activo = activo
+    ejecutivo.save()
+    return Response(status=status.HTTP_200_OK)

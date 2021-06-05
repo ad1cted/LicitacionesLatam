@@ -21,6 +21,7 @@ urlpatterns = [
     path('get_proveedor/', views.get_proveedor),
     path('create_proveedor', views.create_proveedor),
     path('delete_proveedor/<int:arg>', views.delete_proveedor),
+    path('update_proveedor', views.update_proveedor),
 
     # estatus_proveedor
     path('get_estatus_proveedor/<int:arg>', views.get_estatus_proveedor),
@@ -33,6 +34,7 @@ urlpatterns = [
     path('get_contacto/', views.get_contacto),
     path('create_contacto', views.create_contacto),
     path('delete_contacto/<int:arg>', views.delete_contacto),
+    path('update_contacto', views.update_contacto),
 
     # licitacion
     path('get_licitacion/<int:arg>', views.get_licitacion),
@@ -59,12 +61,14 @@ urlpatterns = [
     path('get_organismo/', views.get_organismo),
     path('create_organismo', views.create_organismo),
     path('delete_organismo/<int:arg>', views.delete_organismo),
+    path('update_organismo', views.update_organismo),
 
     # ejecutivo
     path('get_ejecutivo/<int:arg>', views.get_ejecutivo),
     path('get_ejecutivo/', views.get_ejecutivo),
     path('create_ejecutivo', views.create_ejecutivo),
     path('delete_ejecutivo/<int:arg>', views.delete_ejecutivo),
+    path('update_ejecutivo', views.update_ejecutivo),
 
     # rol
     path('get_rol/<int:arg>', views.get_rol),
