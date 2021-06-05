@@ -55,7 +55,7 @@ def create_rolEjecutivo(request: WSGIRequest) -> Response:
 def delete_rolEjecutivo(request: WSGIRequest, arg: str = None) -> Response:
     if arg:
         try:
-            RolEjecutivo.objects.get(id=arg)
+            RolEjecutivo.objects.get(id=arg).delete()
             return Response(status=status.HTTP_200_OK,
                             data={"message": f"ProveeRolEjecutivodor id={arg} borrado correctamente"})
         except:

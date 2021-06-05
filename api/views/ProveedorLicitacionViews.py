@@ -43,7 +43,7 @@ def create_proveedorLicitacion(request: WSGIRequest) -> Response:
         id_Proveedor: str = body.get("id_Proveedor", None)
         proveedor = Proveedor.objects.get(id=id_Proveedor)
     except:
-        return Response(status=status.HTTP_400_BAD_REQUEST, data={"error": "isocode incorrecto"})
+        return Response(status=status.HTTP_400_BAD_REQUEST, data={"error": "no existe el proveedor "})
     sended_status = status.HTTP_206_PARTIAL_CONTENT
     if raw_data:
         ProveedorLicitacion.objects.create(
@@ -60,7 +60,7 @@ def create_proveedorLicitacion(request: WSGIRequest) -> Response:
 def delete_proveedorLicitacion(request: WSGIRequest, arg: str = None) -> Response:
     if arg:
         try:
-            ProveedorLicitacion.objects.get(id=arg)
+            ProveedorLicitacion.objects.get(id=arg).delete()
             return Response(status=status.HTTP_200_OK,
                             data={"message": f"ProveedorLicitacion id={arg} borrado correctamente"})
         except:

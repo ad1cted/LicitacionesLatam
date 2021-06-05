@@ -46,7 +46,7 @@ def create_estatus_proveedor(request: WSGIRequest) -> Response:
 def delete_estatus_proveedor(request: WSGIRequest, arg: str = None) -> Response:
     if arg:
         try:
-            EstatusProveedor.objects.get(id=arg)
+            EstatusProveedor.objects.get(id=arg).delete()
             return Response(status=status.HTTP_200_OK,
                             data={"message": f"EstatusProveedor id={arg} borrado correctamente"})
         except:

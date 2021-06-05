@@ -29,10 +29,10 @@ def create_ejecutivo(request: WSGIRequest) -> Response:
 
 
 @api_view(['GET'])
-def get_ejecutivo(request: WSGIRequest, arg: str = None) -> Response:
+def get_ejecutivo(request: WSGIRequest, arg: int = None) -> Response:
     if arg:
         try:
-            ejecutivo: list = [Ejecutivo.objects.get(isocode=arg)]
+            ejecutivo: list = [Ejecutivo.objects.get(id=arg)]
         except ObjectDoesNotExist:
             ejecutivo = []
     else:
@@ -45,7 +45,7 @@ def get_ejecutivo(request: WSGIRequest, arg: str = None) -> Response:
 def delete_ejecutivo(request: WSGIRequest, arg: str = None) -> Response:
     if arg:
         try:
-            Ejecutivo.objects.get(id=arg)
+            Ejecutivo.objects.get(id=arg).delete()
             return Response(status=status.HTTP_200_OK, data={"message": f"ejecutivo id={arg} borrado correctamente"})
         except:
             return Response(status=status.HTTP_404_NOT_FOUND,

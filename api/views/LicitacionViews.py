@@ -70,7 +70,7 @@ def create_licitacion(request: WSGIRequest) -> Response:
 def delete_licitacion(request: WSGIRequest, arg: str = None) -> Response:
     if arg:
         try:
-            Licitacion.objects.get(id=arg)
+            Licitacion.objects.get(id=arg).delete()
             return Response(status=status.HTTP_200_OK,
                             data={"message": f"licitacion id={arg} borrado correctamente"})
         except:

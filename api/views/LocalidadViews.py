@@ -11,12 +11,15 @@ from kernel.serializers import LocalidadSerializer
 
 
 @api_view(['GET'])
-def get_localidad(request: WSGIRequest, isocode: str = None) -> Response:
-    if isocode:
-        monedas: list = [Localidad.objects.get(isocode=isocode)]
+def get_localidad(request: WSGIRequest, id: str = None) -> Response:
+    if id:
+        try:
+            localidad: list = [Localidad.objects.get(id=id)]
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND)
     else:
-        monedas: list = Localidad.objects.all()
-    serializer: LocalidadSerializer = LocalidadSerializer(monedas, many=True)
+        localidad: list = Localidad.objects.all()
+    serializer: LocalidadSerializer = LocalidadSerializer(localidad, many=True)
     return Response(serializer.data)
 
 
@@ -45,7 +48,7 @@ def create_localidad(request: WSGIRequest) -> Response:
 def delete_localidad(request: WSGIRequest, arg: str = None) -> Response:
     if arg:
         try:
-            Localidad.objects.get(id=arg)
+            Localidad.objects.get(id=arg).delete()
             return Response(status=status.HTTP_200_OK,
                             data={"message": f"Localidad id={arg} borrado correctamente"})
         except:

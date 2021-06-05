@@ -52,11 +52,12 @@ def create_proveedorEstatus_proveedor(request: WSGIRequest) -> Response:
         sended_status: int = status.HTTP_201_CREATED
     return Response(status=status.HTTP_201_CREATED)
 
+
 @api_view(['GET'])
 def delete_proveedorEstatus_proveedor(request: WSGIRequest, arg: str = None) -> Response:
     if arg:
         try:
-            ProveedorEstatusProveedor.objects.get(id=arg)
+            ProveedorEstatusProveedor.objects.get(id=arg).delete()
             return Response(status=status.HTTP_200_OK,
                             data={"message": f"proveedorEstatus_proveedor id={arg} borrado correctamente"})
         except:

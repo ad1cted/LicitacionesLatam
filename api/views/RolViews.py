@@ -14,7 +14,7 @@ from kernel.serializers import RolSerializer
 def get_rol(request: WSGIRequest, arg: str = None) -> Response:
     if arg:
         try:
-            rol: list = [Rol.objects.get(id_contacto=arg)]
+            rol: list = [Rol.objects.get(id=arg)]
         except ObjectDoesNotExist:
             rol = []
     else:
@@ -48,7 +48,7 @@ def create_rol(request: WSGIRequest) -> Response:
 def delete_rol(request: WSGIRequest, arg: str = None) -> Response:
     if arg:
         try:
-            Rol.objects.get(id=arg)
+            Rol.objects.get(id=arg).delete()
             return Response(status=status.HTTP_200_OK,
                             data={"message": f"Rol id={arg} borrado correctamente"})
         except:

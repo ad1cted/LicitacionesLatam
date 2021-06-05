@@ -13,7 +13,11 @@ from kernel.serializers import MonedaSerializer
 @api_view(['GET'])
 def get_moneda(request: WSGIRequest, isocode: str = None) -> Response:
     if isocode:
-        monedas: list = [Moneda.objects.get(isocode=isocode)]
+        try:
+            monedas: list = [Moneda.objects.get(isocode=isocode)]
+        except:
+            return Response(status=status.HTTP_204_NO_CONTENT)
+
     else:
         monedas: list = Moneda.objects.all()
     serializer: MonedaSerializer = MonedaSerializer(monedas, many=True)
@@ -37,12 +41,13 @@ def create_moneda(request: WSGIRequest) -> Response:
     return Response(status=sended_status)
 
 @api_view(['GET'])
-def delete_moneda(request: WSGIRequest, arg: str = None) -> Response:
-    if arg:
+def delete_moneda(request: WSGIRequest, isocode: str = None) -> Response:
+    if isocode:
         try:
-            Moneda.objects.get(id=arg)
+            print(isocode)
+            Moneda.objects.get(isocode=isocode).delete()
             return Response(status=status.HTTP_200_OK,
-                            data={"message": f"Moneda id={arg} borrado correctamente"})
+                            data={"message": f"Moneda id={isocode} borrado correctamente"})
         except:
             return Response(status=status.HTTP_404_NOT_FOUND,
                             data={"error": "imposible borrar el Moneda, es posible que ni exista"})

@@ -44,7 +44,7 @@ def get_pais(request: WSGIRequest, arg: str = None) -> Response:
 def delete_pais(request: WSGIRequest, arg: str = None) -> Response:
     if arg:
         try:
-            Pais.objects.get(id=arg)
+            Pais.objects.get(isocode=arg).delete()
             return Response(status=status.HTTP_200_OK,
                             data={"message": f"Pais id={arg} borrado correctamente"})
         except:

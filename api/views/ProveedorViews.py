@@ -54,7 +54,7 @@ def create_proveedor(request: WSGIRequest) -> Response:
 def delete_proveedor(request: WSGIRequest, arg: str = None) -> Response:
     if arg:
         try:
-            Proveedor.objects.get(id=arg)
+            Proveedor.objects.get(id=arg).delete()
             return Response(status=status.HTTP_200_OK,
                             data={"message": f"Proveedor id={arg} borrado correctamente"})
         except:

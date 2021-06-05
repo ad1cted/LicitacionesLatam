@@ -47,7 +47,7 @@ def create_estadoProveedor_licitacion(request: WSGIRequest) -> Response:
 def delete_estadoProveedor_licitacion(request: WSGIRequest, arg: str = None) -> Response:
     if arg:
         try:
-            EstadoProvedorLicitacion.objects.get(id=arg)
+            EstadoProvedorLicitacion.objects.get(id=arg).delete()
             return Response(status=status.HTTP_200_OK,
                             data={"message": f"EstadoProvedorLicitacion id={arg} borrado correctamente"})
         except:

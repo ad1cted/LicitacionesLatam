@@ -11,10 +11,10 @@ from kernel.serializers import OrganismoSerializer
 
 
 @api_view(['GET'])
-def get_organismo(request: WSGIRequest, arg: str = None) -> Response:
+def get_organismo(request: WSGIRequest, arg: int = None) -> Response:
     if arg:
         try:
-            organismo: list = [Organismo.objects.get(id_contacto=arg)]
+            organismo: list = [Organismo.objects.get(id=arg)]
         except ObjectDoesNotExist:
             organismo = []
     else:
@@ -51,7 +51,7 @@ def create_organismo(request: WSGIRequest) -> Response:
 def delete_organismo(request: WSGIRequest, arg: str = None) -> Response:
     if arg:
         try:
-            Organismo.objects.get(id=arg)
+            Organismo.objects.get(id=arg).delete()
             return Response(status=status.HTTP_200_OK,
                             data={"message": f"Organismo id={arg} borrado correctamente"})
         except:

@@ -39,7 +39,7 @@ def create_tipo_contacto(request: WSGIRequest) -> Response:
 def delete_tipo_contacto(request: WSGIRequest, arg: str = None) -> Response:
     if arg:
         try:
-            TipoContacto.objects.get(id=arg)
+            TipoContacto.objects.get(id=arg).delete()
             return Response(status=status.HTTP_200_OK,
                             data={"message": f"TipoContacto id={arg} borrado correctamente"})
         except:
