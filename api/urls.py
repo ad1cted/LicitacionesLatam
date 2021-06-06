@@ -39,6 +39,7 @@ urlpatterns = [
 
     # licitacion
     path('get_licitacion/<int:arg>', views.get_licitacion),
+    path('get_licitacion/pais/<str:isocode>', views.get_licitacion),
     path('get_licitacion/', views.get_licitacion),
     path('create_licitacion', views.create_licitacion),
     path('delete_licitacion/<int:arg>', views.delete_licitacion),

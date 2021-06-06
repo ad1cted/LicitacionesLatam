@@ -10,9 +10,14 @@ from kernel.serializers import LicitacionSerializer
 
 
 @api_view(['GET'])
-def get_licitacion(request: WSGIRequest, arg: str = None):
+def get_licitacion(request: WSGIRequest, arg: str = None, isocode: str = None):
     if arg:
         licitacion: list = [Licitacion.objects.get(id=arg)]
+    elif isocode:
+        try:
+            licitacion: list = [Licitacion.objects.get(id_Pais__isocode=isocode)]
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={"error": "no existen licitaciones para ese pais"})
     else:
         licitacion: list = Licitacion.objects.all()
     serializer: LicitacionSerializer = LicitacionSerializer(licitacion, many=True)

@@ -1,24 +1,43 @@
 from django.test import TestCase
+from requests import Response
+
+from kernel.models import *
 
 
 class TEST1(TestCase):
+
     def test_1_HP_TENDER_MX(self):
-        self.assertFalse(True)
+        Pais(isocode="MEX", nombre="Mexico").save()
+        pais = Pais.objects.get(isocode="MEX")
+        Licitacion(id_Pais=pais).save()
+        response: Response = self.client.get("/api/get_licitacion/pais/MEX")
+        self.assertEqual(response.status_code, 200)
 
     def test_1_HP_TENDER_CL(self):
-        self.assertFalse(True)
+        Pais(isocode="CHI", nombre="Chile").save()
+        pais = Pais.objects.get(isocode="CHI")
+        Licitacion(id_Pais=pais).save()
+        response: Response = self.client.get("/api/get_licitacion/pais/CHI")
+        self.assertEqual(response.status_code, 200)
 
     def test_1_HP_TENDER_PE(self):
-        self.assertFalse(True)
+        Pais(isocode="PER", nombre="Peru").save()
+        pais = Pais.objects.get(isocode="PER")
+        Licitacion(id_Pais=pais).save()
+        response: Response = self.client.get("/api/get_licitacion/pais/PER")
+        self.assertEqual(response.status_code, 200)
 
     def test_1_UP_NULL(self):
-        self.assertFalse(True)
+        response: Response = self.client.get("/api/get_licitacion/pais/")
+        self.assertEqual(response.status_code, 404)
 
     def test_1_UP_NOT_SUPPORTED(self):
-        self.assertFalse(True)
+        response: Response = self.client.get("/api/get_licitacion/pais/RUS")
+        self.assertEqual(response.status_code, 400)
 
     def test_1_UP_WRONG_DATATYPE(self):
-        self.assertFalse(True)
+        response: Response = self.client.get("/api/get_licitacion/pais/123")
+        self.assertEqual(response.status_code, 400)
 
 
 class TEST2(TestCase):
