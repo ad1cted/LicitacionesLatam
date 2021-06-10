@@ -94,7 +94,6 @@ urlpatterns = [
     path('delete_proveedorEstatus_proveedor/<int:arg>', views.delete_proveedorEstatus_proveedor),
     path('update_proveedorEstatus_proveedor', views.update_proveedorEstatus_proveedor),
 
-
     # estadoProveedor_licitaciones
     path('get_estadoProveedor_licitacion/<str:arg>', views.get_estadoProveedor_licitacion),
     path('get_estadoProveedor_licitacion/', views.get_estadoProveedor_licitacion),
@@ -107,7 +106,12 @@ urlpatterns = [
     path('get_proveedorLicitacion/', views.get_proveedorLicitacion),
     path('create_proveedorLicitacion', views.create_proveedorLicitacion),
     path('delete_proveedorLicitacion/<int:arg>', views.delete_proveedorLicitacion),
-    path('update_proveedorLicitacion', views.update_proveedorLicitacion)
-
+    path('update_proveedorLicitacion', views.update_proveedorLicitacion),
+    # portafolio
+    path('get_portafolio/<str:arg>', views.get_portafolio),
+    path('get_portafolio/', views.get_portafolio),
+    path('create_portafolio', views.create_portafolio),
+    path('delete_portafolio/<int:arg>', views.delete_portafolio),
+    path('update_portafolio', views.update_portafolio)
 
 ]

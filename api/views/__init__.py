@@ -7,6 +7,7 @@ from .LocalidadViews import *
 from .MonedaViews import *
 from .OrganismoViews import *
 from .PaisViews import *
+from .PortafolioViews import *
 from .ProveedorEstatusProveedorViews import *
 from .ProveedorLicitacionViews import *
 from .ProveedorViews import *

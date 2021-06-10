@@ -105,3 +105,8 @@ class Rol(TimeStampMixin):
 class RolEjecutivo(TimeStampMixin):
     id_Rol = models.ForeignKey(Rol, on_delete=models.CASCADE, blank=True, null=True)
     id_Ejecutivo = models.ForeignKey(Ejecutivo, on_delete=models.CASCADE, blank=True, null=True)
+
+
+class Portafolio(TimeStampMixin):
+    id_Ejecutivo = models.ForeignKey(Ejecutivo, on_delete=models.CASCADE, blank=True, null=True)
+    id_Proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE, blank=True, null=True)

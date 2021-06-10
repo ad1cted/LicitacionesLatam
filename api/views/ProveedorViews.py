@@ -37,7 +37,7 @@ def create_proveedor(request: WSGIRequest) -> Response:
     try:
         isocode = Localidad.objects.get(isocode=isocode)
     except:
-        return Response(status=status.HTTP_400_BAD_REQUEST, data={"error": "isocode incorrecto"})
+        return Response(status=status.HTTP_400_BAD_REQUEST, data={"error": "isocode de localidad incorrecto"})
     sended_status = status.HTTP_206_PARTIAL_CONTENT
     if nombre and dni:
         Proveedor.objects.create(
