@@ -9,6 +9,8 @@ from bs4 import BeautifulSoup
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework import status
+from rest_framework.response import Response
 from selenium import webdriver
 
 
@@ -20,15 +22,12 @@ def init_chromedriver():
     return driver
 
 
-@csrf_exempt
-def get_denue(request: WSGIRequest) -> JsonResponse:
+def get_denue(business_name) -> Response:
     """
     :rtype: JsonResponse
     :param request: WSGIRequest
     :return: Este servicio permite obtener una list a de correos asociadas a una razon social
     """
-    body: dict = json.loads(request.body)
-    business_name: str = body.get("business_name", "")
     business_name: str = urllib.parse.quote(business_name.encode(encoding='UTF-8', errors='strict'))
     url: str = f"https://www.inegi.org.mx/app/api/denue/v1/consulta/Nombre/{business_name}/00/1/10/2086f9f0-045d-408f-b99e-0ac210f0fef3"
     req: requests.models.Response = requests.get(url=url)
@@ -37,13 +36,10 @@ def get_denue(request: WSGIRequest) -> JsonResponse:
     for establishment in req_json:
         if isinstance(establishment, dict) and establishment["Correo_e"] != "":
             email.append(establishment["Correo_e"])
-    return JsonResponse(
-        {"response": email
-         }, status=200
-    )
+    return Response(status=status.HTTP_200_OK, data={"email": email})
 
 
-@csrf_exempt
+
 def get_data_by_codigo_expediente(request: WSGIRequest) -> JsonResponse:
     body: dict = json.loads(request.body)
     codigo_expediente: str = body.get("codigo_expediente", None)
@@ -76,7 +72,7 @@ def get_data_by_codigo_expediente(request: WSGIRequest) -> JsonResponse:
     )
 
 
-@csrf_exempt
+
 def get_data_by_opportunity_id(request: WSGIRequest) -> JsonResponse:
     body: dict = json.loads(request.body)
     opportunity_id: str = body.get("opportunity_id", None)
