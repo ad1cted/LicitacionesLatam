@@ -55,7 +55,7 @@ def create_licitacion(request: WSGIRequest) -> Response:
         return Response(status=status.HTTP_400_BAD_REQUEST, data={"error": "error con organismo"})
     try:
         id_TipoLicitacion: str = body.get("id_TipoLicitacion", None)
-        tipo_licitacion = TipoLicitacion.objects.get(id=id_organismo)
+        tipo_licitacion = TipoLicitacion.objects.get(id=id_TipoLicitacion)
     except:
         return Response(status=status.HTTP_400_BAD_REQUEST, data={"error": "error con id_TipoLicitacion"})
     sended_status = status.HTTP_206_PARTIAL_CONTENT
