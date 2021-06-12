@@ -14,3 +14,4 @@ from .ProveedorViews import *
 from .RolEjecutivoViews import *
 from .RolViews import *
 from .TipoContactoViews import *
+from .TipoLicitacionView import *

@@ -112,6 +112,13 @@ urlpatterns = [
     path('get_portafolio/', views.get_portafolio),
     path('create_portafolio', views.create_portafolio),
     path('delete_portafolio/<int:arg>', views.delete_portafolio),
-    path('update_portafolio', views.update_portafolio)
+    path('update_portafolio', views.update_portafolio),
+
+    # tipo licitacion
+    path('get_tipo_licitacion/<str:arg>', views.get_tipo_licitacion),
+    path('get_tipo_licitacion/', views.get_tipo_licitacion),
+    path('create_tipo_licitacion', views.create_tipo_licitacion),
+    path('delete_tipo_licitacion/<int:arg>', views.delete_tipo_licitacion),
+    path('update_tipo_licitacion', views.update_tipo_licitacion)
 
 ]
