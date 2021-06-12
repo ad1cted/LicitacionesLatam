@@ -77,6 +77,11 @@ class Ejecutivo(TimeStampMixin):
     activo = models.BooleanField(blank=True, null=True)
 
 
+class TipoLicitacion(TimeStampMixin):
+    nombre = models.CharField(max_length=20, blank=True, null=True)
+    descripcion = models.CharField(max_length=100, blank=True, null=True)
+
+
 class Licitacion(TimeStampMixin):
     external_id = models.CharField(unique=True, max_length=50, blank=True, null=True)
     raw_data = models.TextField(blank=True, null=True)
@@ -87,6 +92,7 @@ class Licitacion(TimeStampMixin):
     id_Moneda = models.ForeignKey(Moneda, on_delete=models.CASCADE, blank=True, null=True)
     id_Organismo = models.ForeignKey(Organismo, blank=True, null=True, on_delete=models.CASCADE)
     id_Ejecutivo = models.ForeignKey(Ejecutivo, blank=True, null=True, on_delete=models.CASCADE)
+    id_TipoLicitacion = models.ForeignKey(TipoLicitacion, blank=True, null=True, on_delete=models.CASCADE)
 
 
 class ProveedorLicitacion(TimeStampMixin):
