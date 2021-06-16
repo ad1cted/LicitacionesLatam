@@ -8,7 +8,6 @@ import requests
 from bs4 import BeautifulSoup
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status
 from rest_framework.response import Response
 from selenium import webdriver
@@ -37,7 +36,6 @@ def get_denue(business_name) -> Response:
         if isinstance(establishment, dict) and establishment["Correo_e"] != "":
             email.append(establishment["Correo_e"])
     return Response(status=status.HTTP_200_OK, data={"email": email})
-
 
 
 def get_data_by_codigo_expediente(request: WSGIRequest) -> JsonResponse:
@@ -70,7 +68,6 @@ def get_data_by_codigo_expediente(request: WSGIRequest) -> JsonResponse:
         {"response": retorno
          }, status=status
     )
-
 
 
 def get_data_by_opportunity_id(request: WSGIRequest) -> JsonResponse:
